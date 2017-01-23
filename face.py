@@ -3,6 +3,8 @@ import math
 import random
 from collections import deque
 
+import config
+
 class Face:
 
     def __init__(self, x, y, w, h):
@@ -26,14 +28,14 @@ class Face:
 
         #print("Compteur : ", cpt)
 
-        if(cpt > 8):
+        if(cpt > config.MIN_TIMES_DETECTED_IN_FRAMES):
             if(self.isDuckFace):
                 cv2.rectangle(frame, (int(self.x - self.width / 2), int(self.y - self.height / 2)), (int(self.x + self.width / 2), int(self.y + self.height / 2)), (0, 255, 0), 1)
             else:
                 cv2.rectangle(frame, (int(self.x - self.width / 2), int(self.y - self.height / 2)), (int(self.x + self.width / 2), int(self.y + self.height / 2)), (self.b, self.g, self.r), 1)
             return True
 
-        if(len(self.detectedFrames) < 10):
+        if(len(self.detectedFrames) < config.NB_FRAMES_TO_DETECT):
             return True
 
         return False
@@ -45,7 +47,7 @@ class Face:
         ratioW = abs(self.width / face[2])
         ratioH = abs(self.height / face[3])
 
-        if d < 100 and 0.9 < ratioW < 1.1 and 0.9 < ratioH < 1.1:
+        if d < config.SAME_MAX_DIST and 1 - config.SAME_MAX_RATIO < ratioW < 1 + config.SAME_MAX_RATIO and 1 - config.SAME_MAX_RATIO < ratioH < 1 + config.SAME_MAX_RATIO:
             return True
 
         return False
@@ -58,7 +60,7 @@ class Face:
 
 
     def mayNotBeDetected(self):
-        if(len(self.detectedFrames) >= 10):
+        if(len(self.detectedFrames) >= config.NB_FRAMES_TO_DETECT):
             self.detectedFrames.popleft()
         self.detectedFrames.append(False)
 

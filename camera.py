@@ -1,22 +1,49 @@
 import cv2
 
+import config
+
+VITESSE_1 = 0b01
+VITESSE_2 = 0b10
+VITESSE_3 = 0b11
+
+MOVE_BACK = 0b1
+MOVE_FRONT = 0b0
+
 class Camera:
-    current_location_x = 0
-    current_location_y = 0
-    c_x = 0
-    c_y = 0
-    height = 200
-    width = 300
+    x = 0
+    y = 0
+    height = config.CAMERA_HEIGHT
+    width = config.CAMERA_WIDTH
 
 
     def goTo(self, face):
 
-        # en fonction de la vitesse courante, de la position courante et de la prosition à atteindre, détermine les prochaines actions
+        goto = 0b00
 
-        self.current_location_x = face.x
-        self.current_location_y = face.y
+        # en fonction de la position courante et de la prosition à atteindre, détermine les prochaines actions
+        if(config.SEUIL_VITESSE_1 < abs(face.x - self.x)):
+            if(face.x < self.x):
+                goto |= MOVE_BACK << 2
+        if(config.SEUIL_VITESSE_1 < abs(face.x - self.x) <= config.SEUIL_VITESSE_2):
+            goto |= VITESSE_1
+        if(config.SEUIL_VITESSE_2 < abs(face.x - self.x) <= config.SEUIL_VITESSE_3):
+            goto |= VITESSE_2
+        if(config.SEUIL_VITESSE_3 < abs(face.x - self.x)):
+            goto |= VITESSE_3
 
-        return "GoTo"
+        goto = goto << 3
+
+        if(config.SEUIL_VITESSE_1 < abs(face.y - self.y)):
+            if(face.y < self.y):
+                goto |= MOVE_BACK << 2
+        if(config.SEUIL_VITESSE_1 < abs(face.y - self.y) <= config.SEUIL_VITESSE_2):
+            goto |= VITESSE_1
+        if(config.SEUIL_VITESSE_2 < abs(face.y - self.y) <= config.SEUIL_VITESSE_3):
+            goto |= VITESSE_2
+        if(config.SEUIL_VITESSE_3 < abs(face.y - self.y)):
+            goto |= VITESSE_3
+
+        return goto
 
     def draw(self, frame):
-        cv2.rectangle(frame, (int(self.current_location_x - self.width / 2), int(self.current_location_y - self.height / 2)), (int(self.current_location_x + self.width / 2), int(self.current_location_y + self.height / 2)), (0, 0, 255), 1)
+        cv2.rectangle(frame, (int(self.x - self.width / 2), int(self.y - self.height / 2)), (int(self.x + self.width / 2), int(self.y + self.height / 2)), (0, 0, 255), 1)
