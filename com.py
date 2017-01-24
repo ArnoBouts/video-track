@@ -14,13 +14,17 @@ class Com(threading.Thread):
     def run(self):
         i = 0
         while not self._stopevent.isSet():
+            self.readMsg()
             if(not self.msgToSend is None):
                 self.sendMsg()
                 self.msgToSend = None
-            self._stopevent.wait(.200)
+            self._stopevent.wait(.05)
 
     def sendMsg(self):
         print(bin(self.msgToSend))
 
     def stop(self):
         self._stopevent.set( )
+
+    def readMsg(self):
+        return

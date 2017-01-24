@@ -1,3 +1,4 @@
+import cv2
 from com import Com
 
 class Debug(Com):
@@ -19,7 +20,7 @@ class Debug(Com):
             sensX = -1
         deltaX = 0
         if(self.msgToSend >> 3 & VITESSE_3 == VITESSE_1):
-            deltaX = 5
+            deltaX = 3
         elif(self.msgToSend >> 3 & VITESSE_3 == VITESSE_2):
             deltaX = 20
         elif(self.msgToSend >> 3 & VITESSE_3 == VITESSE_3):
@@ -32,10 +33,16 @@ class Debug(Com):
             sensY = -1
         deltaY = 0
         if(self.msgToSend & VITESSE_3 == VITESSE_1):
-            deltaY = 5
+            deltaY = 3
         elif(self.msgToSend & VITESSE_3 == VITESSE_2):
             deltaY = 20
         elif(self.msgToSend & VITESSE_3 == VITESSE_3):
             deltaY = 100
 
         self.camera.y += sensY * deltaY
+
+
+    #def readMsg(self):
+        #key = cv2.waitKey(1) & 0xFF
+        #if key == ord('n'):
+        #    print("next")
