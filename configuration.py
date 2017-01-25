@@ -55,15 +55,15 @@ class Config:
                     config.SPEED_THRESHOLD_1 = int(detection.duckFace.width / 5)
                     config.SPEED_THRESHOLD_2 = detection.duckFace.width
                     config.SPEED_THRESHOLD_3 = int(3 * detection.duckFace.width / 2)
-                    config.STOP_MOVING_SPEED_THRESHOLD = 5
+                    config.STOP_MOVING_SPEED_THRESHOLD = int(detection.duckFace.width / 20)
 
-                    config.SAME_MAX_DIST = detection.duckFace.width / 2
+                    config.SAME_MAX_DIST = detection.duckFace.width / 3
 
                     config.MOTION_DETECT_WIDTH = 2 * detection.duckFace.width * config.RESIZE_RATIO
                     config.MOTION_DETECT_HEIGHT = 3 / 2 * detection.duckFace.height * config.RESIZE_RATIO
 
 
-                    print(config.SPEED_THRESHOLD_1, config.SPEED_THRESHOLD_2, config.SPEED_THRESHOLD_3)
+                    print(config.STOP_MOVING_SPEED_THRESHOLD, config.SPEED_THRESHOLD_1, config.SPEED_THRESHOLD_2, config.SPEED_THRESHOLD_3)
                     print(config.MOTION_DETECT_WIDTH, config.MOTION_DETECT_HEIGHT)
 
                 camera.x = detection.duckFace.x

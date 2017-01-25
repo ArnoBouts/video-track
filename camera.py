@@ -30,7 +30,7 @@ class Camera:
         distY = abs(face.y + config.CAMERA_DELTA - self.y)
 
         # en fonction de la position courante et de la prosition à atteindre, détermine les prochaines actions
-        if(config.SPEED_THRESHOLD_1 < distX):
+        if(movingX and config.STOP_MOVING_SPEED_THRESHOLD < distX or config.SPEED_THRESHOLD_1 < distX):
             if(face.x < self.x):
                 goto |= MOVE_BACK << 2
         if(movingX and config.STOP_MOVING_SPEED_THRESHOLD < distX or config.SPEED_THRESHOLD_1 < distX <= config.SPEED_THRESHOLD_2):
@@ -42,7 +42,7 @@ class Camera:
 
         goto = goto << 3
 
-        if(config.SPEED_THRESHOLD_1 < distY):
+        if(movingY and config.STOP_MOVING_SPEED_THRESHOLD < distY or config.SPEED_THRESHOLD_1 < distY):
             if(face.y + config.CAMERA_DELTA < self.y):
                 goto |= MOVE_BACK << 2
         if(movingY and config.STOP_MOVING_SPEED_THRESHOLD < distY or config.SPEED_THRESHOLD_1 < distY <= config.SPEED_THRESHOLD_2):

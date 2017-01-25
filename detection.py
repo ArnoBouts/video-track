@@ -69,7 +69,7 @@ class Detection:
             found = False
             for face in self.faces:
                 if(not face.isValid() and newFace.canBe(face)):
-                    faces[cptFace] = newFace
+                    self.facesfaces[cptFace] = newFace
                     if(face == self.duckFace):
                         print("Duck Face is", newFace.name, newFace.width, newFace.height)
                         self.duckFace = newFace

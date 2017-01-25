@@ -45,7 +45,12 @@ while(capture.isOpened()):
 
     # Find for speakers in picture
     if(init and cpt % config.SKIP_IMAGES == 0):
-        detection.whereAreMySpeakers(frame)
+        try:
+            detection.whereAreMySpeakers(frame)
+        except Exception as e:
+            print("Frame", cpt, e)
+
+
 
     # Draw speakers
     for face in detection.faces:
