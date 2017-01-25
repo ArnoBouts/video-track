@@ -10,6 +10,7 @@ MOVE_BACK = 0b1
 MOVE_FRONT = 0b0
 
 class Camera:
+    configuring = False
     x = 0
     y = 0
     height = config.CAMERA_HEIGHT
@@ -26,7 +27,7 @@ class Camera:
         movingY = self.previousGoto & 0b011 != 0
 
         distX = abs(face.x - self.x)
-        distY = abs(face.y - self.y)
+        distY = abs(face.y + config.CAMERA_DELTA - self.y)
 
         # en fonction de la position courante et de la prosition à atteindre, détermine les prochaines actions
         if(config.SPEED_THRESHOLD_1 < distX):
@@ -42,7 +43,7 @@ class Camera:
         goto = goto << 3
 
         if(config.SPEED_THRESHOLD_1 < distY):
-            if(face.y < self.y):
+            if(face.y + config.CAMERA_DELTA < self.y):
                 goto |= MOVE_BACK << 2
         if(movingY and config.STOP_MOVING_SPEED_THRESHOLD < distY or config.SPEED_THRESHOLD_1 < distY <= config.SPEED_THRESHOLD_2):
             goto |= SPEED_1
@@ -56,4 +57,4 @@ class Camera:
         return goto
 
     def draw(self, frame):
-        cv2.rectangle(frame, (int(self.x - self.width / 2), int(self.y - self.height / 2)), (int(self.x + self.width / 2), int(self.y + self.height / 2)), (0, 0, 255), 1)
+        cv2.rectangle(frame, (int(self.x - config.CAMERA_WIDTH / 2), int(self.y - config.CAMERA_HEIGHT / 2)), (int(self.x + config.CAMERA_WIDTH / 2), int(self.y + config.CAMERA_HEIGHT / 2)), (0, 0, 255), 1)
