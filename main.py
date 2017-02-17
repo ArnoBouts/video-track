@@ -37,7 +37,7 @@ cpt = 0
 
 while(capture.isOpened()):
 
-    if(!init):
+    if(init == False):
         Config.config((faceCascade, profileCascade), capture, camera)
         init = True
 
