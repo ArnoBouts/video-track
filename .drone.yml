@@ -1,0 +1,11 @@
+workspace:
+  base: /drone
+  path: .
+
+pipeline:
+  build:
+    image: python:3
+    commands:
+      - apt-get update
+      - apt-get install opencv python-numpy
+      - python main.py
