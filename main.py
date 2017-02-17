@@ -37,6 +37,10 @@ cpt = 0
 
 while(capture.isOpened()):
 
+    if(!init):
+        Config.config((faceCascade, profileCascade), capture, camera)
+        init = True
+
     cpt += 1
 
     #print("Frame : ", cpt)
@@ -65,7 +69,7 @@ while(capture.isOpened()):
     camera.draw(frame)
 
     # Display the resulting frame
-    cv2.imshow('Video', frame)
+    # cv2.imshow('Video', frame)
 
     key = cv2.waitKey(1) & 0xFF
 

@@ -65,6 +65,7 @@ class Config:
 
                     print(config.STOP_MOVING_SPEED_THRESHOLD, config.SPEED_THRESHOLD_1, config.SPEED_THRESHOLD_2, config.SPEED_THRESHOLD_3)
                     print(config.MOTION_DETECT_WIDTH, config.MOTION_DETECT_HEIGHT)
+                    return
 
                 camera.x = detection.duckFace.x
                 camera.y = detection.duckFace.y + config.CAMERA_DELTA
