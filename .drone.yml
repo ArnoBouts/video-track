@@ -7,5 +7,5 @@ pipeline:
     image: python:3
     commands:
       - apt-get update
-      - apt-get install libopencv-dev python-opencv python-numpy
+      - apt-get install -y libopencv-dev python-opencv python-numpy
       - python main.py
