@@ -41,6 +41,8 @@ class Debug(Com):
 
         self.camera.y += sensY * deltaY
 
+        print("(" + str(deltaX) + ":" + str(deltaY) + ")")
+
 
     #def readMsg(self):
         #key = cv2.waitKey(1) & 0xFF

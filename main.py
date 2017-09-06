@@ -25,8 +25,8 @@ detection = Detection((faceCascade, profileCascade))
 init = False
 
 #capture = cv2.VideoCapture('Evelyne Dh_liat pr_sente la m_t_o alarmante de 2050.mp4')
-capture = cv2.VideoCapture('videos/00012.MTS')
-#capture = cv2.VideoCapture('videos/download.1')
+#capture = cv2.VideoCapture('videos/00012.MTS')
+capture = cv2.VideoCapture('/mnt/Downloads/android.mp4')
 
 i = 0
 while(i < 0):
@@ -63,6 +63,9 @@ while(capture.isOpened()):
 
     # Draw camera
     camera.draw(frame)
+
+    if not init:
+        cv2.putText(frame, "Press i to configure", (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2)
 
     # Display the resulting frame
     cv2.imshow('Video', frame)

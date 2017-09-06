@@ -54,8 +54,8 @@ class Config:
 
                     config.SPEED_THRESHOLD_1 = int(detection.duckFace.width / 5)
                     config.SPEED_THRESHOLD_2 = detection.duckFace.width
-                    config.SPEED_THRESHOLD_3 = int(3 * detection.duckFace.width / 2)
-                    config.STOP_MOVING_SPEED_THRESHOLD = int(detection.duckFace.width / 20)
+                    config.SPEED_THRESHOLD_3 = 2 * detection.duckFace.width
+                    config.STOP_MOVING_SPEED_THRESHOLD = int(detection.duckFace.width / 10)
 
                     config.SAME_MAX_DIST = detection.duckFace.width / 3
 
